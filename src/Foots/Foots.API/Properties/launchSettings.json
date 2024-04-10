@@ -3,6 +3,7 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "api/products",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
