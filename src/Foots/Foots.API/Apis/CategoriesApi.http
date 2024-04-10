@@ -1,0 +1,6 @@
+GET {{$projectUrl}}/api/categories
+###
+GET {{$projectUrl}}/api/categories/1
+###
+GET {{$projectUrl}}/api/categories/1/products
+

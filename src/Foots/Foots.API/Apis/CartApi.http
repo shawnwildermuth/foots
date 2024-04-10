@@ -1,0 +1,8 @@
+GET {{$projectUrl}}/api/carts/1
+###
+POST {{$projectUrl}}/api/carts
+###
+PUT {{$projectUrl}}/api/carts/1
+###
+DELETE {{$projectUrl}}/api/carts/1
+###
