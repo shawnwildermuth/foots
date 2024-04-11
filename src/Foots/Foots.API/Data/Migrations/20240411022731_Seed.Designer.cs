@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foots.API.Migrations
 {
     [DbContext(typeof(FootsContext))]
-    [Migration("20240411005234_InitialDb")]
-    partial class InitialDb
+    [Migration("20240411022731_Seed")]
+    partial class Seed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,7 +98,7 @@ namespace Foots.API.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Sandal"
+                            Name = "Sandals"
                         },
                         new
                         {

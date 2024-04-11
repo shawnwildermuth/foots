@@ -26,12 +26,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "dotnetef": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      "commandLineArgs": "ef migrations add SampleData",
-      "workingDirectory": "C:\\projects\\foots\\src\\Foots\\Foots.API"
-    }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {

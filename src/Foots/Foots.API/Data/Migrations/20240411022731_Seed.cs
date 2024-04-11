@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -8,100 +7,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Foots.API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDb : Migration
+    public partial class Seed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Carts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DateOpened = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Usage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageFile = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CartItem",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Discount = table.Column<short>(type: "smallint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItem", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CartItem_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartItem_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
                     { 1, "Flip Flops" },
-                    { 2, "Sandal" },
+                    { 2, "Sandals" },
                     { 3, "Shoes" }
                 });
 
@@ -922,37 +839,4080 @@ namespace Foots.API.Migrations
                     { 59435, 3, "Black", "Men", "59435.jpg", "http://assets.myntassets.com/v1/images/style/properties/Arrow-Men-Black-Formal-Shoes_70a3c7c185338a5636c8c0e668829bb6_images.jpg", 75.5m, "Arrow Men Black Formal Shoes", "Formal Shoes", "Formal" },
                     { 59943, 3, "Black", "Men", "59943.jpg", "http://assets.myntassets.com/v1/images/style/properties/Vans-Men-Black---Red-Casual-Shoes_d58b0db818089598dada89b3cca155aa_images.jpg", 26.0m, "Vans Men Black & Red Casual Shoes", "Casual Shoes", "Casual" }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItem_CartId",
-                table: "CartItem",
-                column: "CartId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItem_ProductId",
-                table: "CartItem",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "CartItem");
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1636);
 
-            migrationBuilder.DropTable(
-                name: "Carts");
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1637);
 
-            migrationBuilder.DropTable(
-                name: "Products");
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1653);
 
-            migrationBuilder.DropTable(
-                name: "Categories");
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1654);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1806);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1831);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1836);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2211);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2218);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2219);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2220);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2227);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2399);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2477);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2504);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2642);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2817);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2820);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2821);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2826);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2827);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2828);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2963);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2964);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3150);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3151);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3159);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3160);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3161);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3168);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3300);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3306);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3307);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3308);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3309);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3503);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3504);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3550);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3551);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3556);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3557);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3558);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3559);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3560);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3561);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3566);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3567);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3569);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3592);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3594);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3595);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3790);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3797);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3798);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3996);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3997);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3998);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4112);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4113);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4114);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4141);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4171);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4179);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4183);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4184);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4342);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4343);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4344);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4345);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4514);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4515);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4522);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4523);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4524);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4525);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4546);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4547);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4549);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4576);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4577);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 4578);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5050);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5238);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5239);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5290);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5291);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5296);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5345);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5404);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5405);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5459);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5461);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5467);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5468);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5469);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5600);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5601);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5606);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5608);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5609);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5638);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5654);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5665);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5690);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5691);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5696);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5697);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5698);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5699);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5896);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5898);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 5899);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6362);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6396);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6414);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6423);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6424);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6440);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6441);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6446);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6448);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6470);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6483);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6619);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6620);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6621);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6626);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6627);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6628);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6629);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6642);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6673);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6675);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6680);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6810);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6811);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6816);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6817);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6818);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6821);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 6826);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7244);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7330);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7331);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7363);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7364);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7365);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7390);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7391);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7396);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7397);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7398);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7399);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7592);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7593);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7730);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7731);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7753);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7754);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7797);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7799);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 7881);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8346);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8527);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8528);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8529);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8912);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8913);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8914);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8970);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8971);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8976);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8979);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8982);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8983);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 8984);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9000);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9001);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9030);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9031);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9036);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9037);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9038);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9039);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9052);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9053);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9055);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9090);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9091);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9202);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9203);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9204);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9205);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9400);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9401);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9407);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9430);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9431);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 9497);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10037);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10039);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10097);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10174);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10180);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10266);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10267);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10268);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10293);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10294);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10295);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10632);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10633);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10634);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 10635);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11851);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11856);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11912);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11913);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11914);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11915);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11922);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11923);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11924);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11940);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11941);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11946);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11947);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11948);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11949);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11971);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11976);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11977);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11978);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11979);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11983);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 11985);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12506);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12507);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12508);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12509);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12704);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12705);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12876);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12882);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12885);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12903);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12904);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12956);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12957);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12958);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12959);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12960);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12961);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12966);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12967);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12968);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 12969);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13072);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13073);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13074);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13075);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13080);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13081);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13198);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13214);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13215);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13359);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13537);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13646);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13648);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13649);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13676);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13677);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13679);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13683);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13684);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 13685);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 14490);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 14491);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 14496);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 14497);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 14498);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 14499);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15062);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15250);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15313);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15314);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15315);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15376);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15377);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15378);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15379);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15382);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15384);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15385);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15406);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15510);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15516);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15517);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15518);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15519);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15520);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15521);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15713);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15714);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15722);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15724);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15741);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15746);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 15747);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16152);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16153);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16154);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16155);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16162);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16163);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16164);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16165);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16732);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16733);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16734);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16735);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16966);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 16969);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17026);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17027);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17028);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17029);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17042);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17043);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17044);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17045);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17410);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17411);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17416);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17481);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17647);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17813);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17814);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17815);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17822);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17823);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17840);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17846);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17847);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 17960);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18402);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18403);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18404);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18405);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18492);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18493);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18494);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18495);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18601);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18653);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18655);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 18665);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19122);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19123);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19140);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19141);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19310);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19311);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19329);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19372);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19387);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19772);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19927);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 19928);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20695);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20715);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20802);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20804);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20805);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20833);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20856);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20868);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20869);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20892);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20893);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20894);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 20895);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 21091);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 21175);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 21180);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 21181);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 21186);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 21187);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 21188);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22101);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22109);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22130);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22131);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22136);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22137);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22138);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22139);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22152);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22153);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22154);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22162);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22163);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22164);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22165);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22190);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22191);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22196);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22197);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22198);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22199);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22361);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22536);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22537);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22703);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22704);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22705);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22732);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22733);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22841);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22846);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22958);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 22959);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23246);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23247);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23248);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23249);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23489);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23500);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23676);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23677);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23679);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23682);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23812);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23813);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23814);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23815);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23822);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23823);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23824);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23825);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23840);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23841);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23846);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23847);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23848);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23849);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23877);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23882);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23884);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 23885);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24098);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24099);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24187);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24250);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24251);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24256);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24257);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24258);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24259);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24260);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24408);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24452);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24453);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24454);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24462);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24463);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24666);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24669);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24695);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24805);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 24835);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 25572);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 25573);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 25574);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 25575);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26530);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26531);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26536);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26537);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26538);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26539);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26552);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26553);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26554);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26555);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26562);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26563);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26590);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26591);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26596);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26597);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26598);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26599);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26703);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 26704);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 27640);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28316);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28600);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28606);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28607);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28608);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28636);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28637);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28638);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28652);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28653);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28655);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 28662);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 29123);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 29124);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 29570);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 29571);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 29576);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30233);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30234);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30235);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30250);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30251);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30256);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30257);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30258);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30259);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30260);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 30261);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31693);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31946);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31947);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31948);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31949);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31970);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31971);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31978);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31979);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 31985);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32191);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32506);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32507);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32508);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32509);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32552);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32553);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32554);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32555);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32751);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32757);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 32951);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33641);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33646);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33647);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33648);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33649);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33685);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33766);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33822);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33840);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33841);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33846);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33847);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33848);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 33849);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34090);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34543);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34632);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34633);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34634);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34635);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34749);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34785);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34832);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34835);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34850);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34851);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34856);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34857);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34858);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34860);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 34861);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35233);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35465);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35491);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35511);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35521);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35573);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35574);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35575);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35586);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35587);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35588);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35589);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35657);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35668);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35712);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35713);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35725);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 35777);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 36130);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 36131);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 36138);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 36139);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 36442);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 36957);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 37240);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 37241);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 37246);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 37247);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 37248);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 37249);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 38653);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 38654);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 38655);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 38662);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 38663);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 38664);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 38665);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39263);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39264);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39297);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39310);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39311);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39342);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39546);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39547);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39638);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39742);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39899);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39910);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39942);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39943);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39944);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39945);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39972);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39973);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39974);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39975);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39980);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39981);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39986);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39987);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39988);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 39989);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40322);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40323);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40325);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40776);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40777);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40778);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40779);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40782);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40783);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40784);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40785);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40970);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 40971);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41232);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41233);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41436);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41437);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41438);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41439);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41452);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41453);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41454);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41455);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41832);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41833);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41834);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41857);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41858);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41859);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41861);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41866);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41867);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41868);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 41869);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42010);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42011);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42016);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42017);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42019);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42020);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42042);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42043);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42044);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42045);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42086);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42087);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42088);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42089);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 42276);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43335);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43350);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43357);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43359);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43360);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43368);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43369);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43871);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43876);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43958);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 43959);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44406);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44511);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44516);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44517);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44518);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44520);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44521);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44528);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44529);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44544);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44545);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44572);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44573);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44712);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44713);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44714);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44715);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44740);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44741);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44746);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44747);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44748);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44749);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44770);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44771);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44776);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44777);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44778);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44779);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44782);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44783);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44784);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44785);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44940);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44941);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44947);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 44948);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 45602);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 45603);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 45604);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 45605);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 45866);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 46080);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 46081);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 46215);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 47190);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 47191);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 47196);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 47197);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 47198);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 47199);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 47248);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49059);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49060);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49061);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49435);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49461);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49468);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49469);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49492);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49493);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49494);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 49495);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50376);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50377);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50725);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50740);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50741);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50746);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50747);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50748);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50749);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50776);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50777);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 50778);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 53734);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 53735);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54516);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54517);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54518);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54519);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54520);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54521);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54526);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54527);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54528);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54529);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54542);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54543);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54544);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 54740);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 56410);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 56411);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57475);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57481);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57500);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57501);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57506);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57507);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57508);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57509);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57530);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57531);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57934);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57935);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 57950);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 58328);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 58329);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 59435);
+
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 59943);
+
+            migrationBuilder.DeleteData(
+                table: "Categories",
+                keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "Categories",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "Categories",
+                keyColumn: "Id",
+                keyValue: 3);
         }
     }
 }

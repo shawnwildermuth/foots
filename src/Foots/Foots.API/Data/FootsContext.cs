@@ -1,7 +1,6 @@
-﻿using Foots.API.Data.Entities;
+﻿using System.Text.Json;
+using Foots.API.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Foots.API.Data;
 
@@ -24,22 +23,14 @@ public class FootsContext(IConfiguration configuration) : DbContext
       .Property(p => p.Price)
       .HasColumnType("decimal(9,2)");
 
-    var categoryJson = File.ReadAllText("categories.json");
-    var productJson = File.ReadAllText("products.json");
-
-    var options = new JsonSerializerOptions()
-    {
-      PropertyNameCaseInsensitive = true
-    };
-
-    var categories = JsonSerializer.Deserialize<Category[]>(categoryJson, options);
-    var products = JsonSerializer.Deserialize<Product[]>(productJson, options);
+    var products = SeedData.GetProducts();
+    var categories = SeedData.GetCategories();
 
     modelBuilder.Entity<Category>()
-      .HasData(categories!);
+      .HasData(categories);
 
     modelBuilder.Entity<Product>()
-      .HasData(products!);
+      .HasData(products);
 
   }
 }

@@ -95,7 +95,7 @@ namespace Foots.API.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Sandal"
+                            Name = "Sandals"
                         },
                         new
                         {
