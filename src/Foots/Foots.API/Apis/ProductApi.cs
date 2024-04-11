@@ -35,7 +35,7 @@ public class ProductApi : IApi
         .Select(p => new
         {
           p.Id,
-          p.Description,
+          p.Title,
           p.ImageUrl,
           Category = p.Category != null ? p.Category.Name : ""
         })
